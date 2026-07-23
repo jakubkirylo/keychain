@@ -1,0 +1,416 @@
+<div class="min-h-screen p-4 grid grid-rows-[auto_1fr_auto] gap-6">
+  <div class="flex flex-col items-center gap-3">
+    <div class="flex items-center gap-3">
+      <mat-icon class="size-8 text-[32px] leading-8"> favorite </mat-icon>
+      <h1 class="font-semibold text-2xl">Breloki personalizowane</h1>
+    </div>
+    <span>Stwórz swój własny brelok z grawerem i wybierz spośród wielu dostępnych opcji.</span>
+  </div>
+  <main class="grid grid-cols-[1fr_2fr] items-center justify-center gap-4">
+    <div class="bg-red-500 h-full">Lewa kolumna</div>
+    <form (submit)="onSubmit($event)" class="h-full flex flex-col gap-4">
+      <!-- Snap hook section -->
+      <mat-card class="h-full" appearance="outlined">
+        <mat-card-header>
+          <span class="font-semibold text-sm">1. Karabińczyk - kolor</span>
+        </mat-card-header>
+
+        <mat-card-content class="pt-4">
+          <div class="flex flex-wrap gap-3" role="group">
+            <!-- TODO: to separate component -->
+            @for (option of snapHookOptions; track option.color) {
+              <button
+                type="button"
+                class="group relative grid grid-rows-[104px_36px] overflow-hidden rounded-xl border-2 bg-white text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+                [class.border-pink-600]="configuratorModel().snapHook === option.color"
+                [class.border-gray-200]="configuratorModel().snapHook !== option.color"
+                (click)="selectSnapHookColor(option.color)"
+              >
+                <div class="flex items-center justify-center bg-gray-50 p-2">
+                  <img
+                    class="size-25 object-contain transition-transform group-hover:scale-150"
+                    [src]="option.imageUrl"
+                    [alt]="'Karabińczyk – kolor ' + option.label"
+                  />
+                </div>
+
+                <div class="flex min-w-0 items-center gap-2 px-3">
+                  <span
+                    class="size-4 shrink-0 rounded-full border border-black/15 shadow-sm"
+                    [style.background]="option.color"
+                  ></span>
+                  <span class="truncate font-medium text-gray-900">
+                    {{ option.label }}
+                  </span>
+                </div>
+              </button>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Heart section -->
+      <mat-card class="h-full" appearance="outlined">
+        <mat-card-header>
+          <span class="font-semibold text-sm">2. Zawieszka serce</span>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="flex flex-col gap-2">
+            <div
+              class="inline-grid w-44 grid-cols-2 overflow-hidden rounded-lg border border-gray-300 bg-white"
+              role="group"
+            >
+              <!-- TODO JWK: Create Yes/No component for reusing code -->
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="!configuratorModel().heart.enabled"
+                [class.text-white]="!configuratorModel().heart.enabled"
+                [class.bg-white]="configuratorModel().heart.enabled"
+                [class.text-gray-700]="configuratorModel().heart.enabled"
+                [class.font-semibold]="!configuratorModel().heart.enabled"
+                (click)="setHeart(false)"
+              >
+                Nie
+              </button>
+
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="configuratorModel().heart.enabled"
+                [class.text-white]="configuratorModel().heart.enabled"
+                [class.bg-white]="!configuratorModel().heart.enabled"
+                [class.text-gray-700]="!configuratorModel().heart.enabled"
+                [class.font-semibold]="configuratorModel().heart.enabled"
+                (click)="setHeart(true)"
+              >
+                Tak
+              </button>
+            </div>
+            <div class="flex gap-2">
+              <!-- TODO: to separate component -->
+              @for (option of colorOptions; track option) {
+                <button
+                  type="button"
+                  class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                  [class.border-pink-600]="configuratorModel().heart.color === option"
+                  [class.border-gray-200]="configuratorModel().heart.color !== option"
+                  [disabled]="!configuratorModel().heart.enabled"
+                  (click)="setHeartColor(option)"
+                >
+                  <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
+                    <path
+                      fill="currentColor"
+                      stroke="rgba(0, 0, 0, 0.18)"
+                      stroke-width="0.75"
+                      d="M12 21.35 10.55 20.03C5.4 15.36 2 12.27 2 8.5
+         2 5.41 4.42 3 7.5 3
+         9.24 3 10.91 3.81 12 5.09
+         13.09 3.81 14.76 3 16.5 3
+         19.58 3 22 5.41 22 8.5
+         22 12.27 18.6 15.36 13.45 20.04Z"
+                    />
+                  </svg>
+                </button>
+              }
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Name section -->
+      <mat-card class="h-full" appearance="outlined">
+        <mat-card-header>
+          <span class="font-semibold text-sm">3. Zawieszka z imieniem</span>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="flex flex-col gap-2">
+            <!-- TODO: to separate component -->
+            <div
+              class="inline-grid w-44 grid-cols-2 overflow-hidden rounded-lg border border-gray-300 bg-white"
+              role="group"
+            >
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="!configuratorModel().name.enabled"
+                [class.text-white]="!configuratorModel().name.enabled"
+                [class.bg-white]="configuratorModel().name.enabled"
+                [class.text-gray-700]="configuratorModel().name.enabled"
+                [class.font-semibold]="!configuratorModel().name.enabled"
+                (click)="setName(false)"
+              >
+                Nie
+              </button>
+
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="configuratorModel().name.enabled"
+                [class.text-white]="configuratorModel().name.enabled"
+                [class.bg-white]="!configuratorModel().name.enabled"
+                [class.text-gray-700]="!configuratorModel().name.enabled"
+                [class.font-semibold]="configuratorModel().name.enabled"
+                (click)="setName(true)"
+              >
+                Tak
+              </button>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div
+                class="ml-2 text-sm font-semibold transition-opacity"
+                [class.cursor-not-allowed]="!configuratorModel().name.enabled"
+                [class.opacity-35]="!configuratorModel().name.enabled"
+              >
+                Kolor tła
+              </div>
+              <div class="flex gap-2">
+                <!-- TODO: to separate component -->
+                @for (option of colorOptions; track option) {
+                  <button
+                    type="button"
+                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                    [class.border-pink-600]="configuratorModel().name.fontColor === option"
+                    [class.border-gray-200]="configuratorModel().name.fontColor !== option"
+                    [disabled]="!configuratorModel().name.enabled"
+                    (click)="setNameFontColor(option)"
+                  >
+                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2.5"
+                        fill="currentColor"
+                        stroke="rgba(0, 0, 0, 0.18)"
+                        stroke-width="0.75"
+                      />
+                    </svg>
+                  </button>
+                }
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div
+                class="ml-2 text-sm font-semibold transition-opacity"
+                [class.cursor-not-allowed]="!configuratorModel().name.enabled"
+                [class.opacity-35]="!configuratorModel().name.enabled"
+              >
+                Kolor liter
+              </div>
+              <div class="flex gap-2">
+                <!-- TODO: to separate component -->
+                @for (option of colorOptions; track option) {
+                  <button
+                    type="button"
+                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                    [class.border-pink-600]="configuratorModel().name.backgroundColor === option"
+                    [class.border-gray-200]="configuratorModel().name.backgroundColor !== option"
+                    [disabled]="!configuratorModel().name.enabled"
+                    (click)="setNameBackgroundColor(option)"
+                  >
+                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2.5"
+                        fill="currentColor"
+                        stroke="rgba(0, 0, 0, 0.18)"
+                        stroke-width="0.75"
+                      />
+                    </svg>
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Custom text section -->
+      <mat-card class="h-full" appearance="outlined">
+        <mat-card-header>
+          <span class="font-semibold text-sm">4. Zawieszka z dodatkowym tekstem</span>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="flex flex-col gap-2">
+            <!-- TODO: to separate component -->
+            <div
+              class="inline-grid w-44 grid-cols-2 overflow-hidden rounded-lg border border-gray-300 bg-white"
+              role="group"
+            >
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="!configuratorModel().custom.enabled"
+                [class.text-white]="!configuratorModel().custom.enabled"
+                [class.bg-white]="configuratorModel().custom.enabled"
+                [class.text-gray-700]="configuratorModel().custom.enabled"
+                [class.font-semibold]="!configuratorModel().custom.enabled"
+                (click)="setCustom(false)"
+              >
+                Nie
+              </button>
+
+              <button
+                type="button"
+                class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+                [class.bg-pink-600]="configuratorModel().custom.enabled"
+                [class.text-white]="configuratorModel().custom.enabled"
+                [class.bg-white]="!configuratorModel().custom.enabled"
+                [class.text-gray-700]="!configuratorModel().custom.enabled"
+                [class.font-semibold]="configuratorModel().custom.enabled"
+                (click)="setCustom(true)"
+              >
+                Tak
+              </button>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div
+                class="ml-2 text-sm font-semibold transition-opacity"
+                [class.cursor-not-allowed]="!configuratorModel().custom.enabled"
+                [class.opacity-35]="!configuratorModel().custom.enabled"
+              >
+                Kolor zawieszki
+              </div>
+              <div class="flex gap-2">
+                <!-- TODO: to separate component -->
+                @for (option of colorOptions; track option) {
+                  <button
+                    type="button"
+                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                    [class.border-pink-600]="configuratorModel().custom.color === option"
+                    [class.border-gray-200]="configuratorModel().custom.color !== option"
+                    [disabled]="!configuratorModel().custom.enabled"
+                    (click)="setCustomColor(option)"
+                  >
+                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
+                      <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="2.5"
+                        fill="currentColor"
+                        stroke="rgba(0, 0, 0, 0.18)"
+                        stroke-width="0.75"
+                      />
+                    </svg>
+                  </button>
+                }
+              </div>
+              <div
+                class="ml-2 text-sm font-semibold transition-opacity"
+                [class.cursor-not-allowed]="!configuratorModel().custom.enabled"
+                [class.opacity-35]="!configuratorModel().custom.enabled"
+              >
+                Tekst zawieszki
+                <mat-radio-group (change)="customTextType($event)">
+                  <mat-radio-button
+                    [checked]="!!!configuratorModel().custom.predefinedText"
+                    [value]="false"
+                    >Predefiniowany</mat-radio-button
+                  >
+                  <mat-radio-button
+                    [checked]="!!configuratorModel().custom.predefinedText"
+                    [value]="true"
+                    >Własny</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+              <mat-form-field>
+                <mat-label>Wybierz predefiniowany tekst zawieszki</mat-label>
+
+                <mat-select
+                  class="w-full"
+                  [disabled]="
+                    !configuratorModel().custom.enabled ||
+                    !!configuratorModel().custom.predefinedText
+                  "
+                  [value]="configuratorModel().custom.text || ''"
+                  (selectionChange)="setCustomText($event.value)"
+                >
+                  @for (text of predefinedTexts; track text) {
+                    <mat-option [value]="text">
+                      {{ text }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Wpisz własny tekst</mat-label>
+                <input
+                  matInput
+                  placeholder="Wpisz własny tekst"
+                  [value]="configuratorModel().custom.text || ''"
+                  (input)="setCustomText($event.target.value)"
+                  [disabled]="
+                    !configuratorModel().custom.enabled ||
+                    !configuratorModel().custom.predefinedText
+                  "
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </main>
+  <footer class="space-y-4">
+    <div class="grid gap-3 md:grid-cols-[minmax(220px,0.65fr)_minmax(320px,1.35fr)]">
+      <button
+        type="button"
+        class="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+      >
+        <mat-icon class="size-8 text-[32px] leading-8"> delete </mat-icon>
+        Wyczyść wszystko
+      </button>
+
+      <button
+        type="button"
+        class="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-pink-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-pink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+      >
+        <mat-icon class="size-8 text-[32px] leading-8"> shopping_bag </mat-icon>
+        Dodaj do koszyka
+      </button>
+    </div>
+
+    <div class="grid gap-6 rounded-2xl border border-gray-200 bg-white p-5 sm:grid-cols-4">
+      <div class="flex items-center justify-center gap-3">
+        <mat-icon class="size-8 text-[32px] leading-8"> verified </mat-icon>
+
+        <div>
+          <div class="font-medium text-gray-900">Wysoka jakość wykonania</div>
+          <div class="mt-1 text-sm text-gray-500">Trwałe materiały</div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-3">
+        <mat-icon class="size-8 text-[32px] leading-8"> local_shipping </mat-icon>
+
+        <div>
+          <div class="font-medium text-gray-900">Wysyłka w 2–3 dni robocze</div>
+          <div class="mt-1 text-sm text-gray-500">Szybka realizacja zamówień</div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-3">
+        <mat-icon class="size-8 text-[32px] leading-8"> workspace_premium </mat-icon>
+
+        <div>
+          <div class="font-medium text-gray-900">Produkt personalizowany</div>
+          <div class="mt-1 text-sm text-gray-500">Stworzony specjalnie dla Ciebie</div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center gap-3">
+        <mat-icon class="size-8 text-[32px] leading-8"> workspace_premium </mat-icon>
+
+        <div>
+          <div class="font-medium text-gray-900">Wyprodukowano w Polsce</div>
+
+          <div class="mt-1 text-sm text-gray-500">Lokalna produkcja</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
