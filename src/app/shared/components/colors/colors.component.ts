@@ -10,7 +10,7 @@ import { ColorOptions } from '../../../configurator/domain/configurator.interfac
 export class ColorsComponent {
   public readonly colorOption = input<ColorOptions>();
   public readonly disabled = input<boolean>();
-  public readonly shape = input<'heart' | 'square'>('heart');
+  public readonly shape = input.required<'heart' | 'square'>();
   public readonly valueChange = output<ColorOptions>();
 
   protected readonly colorOptions = ColorOptions;
