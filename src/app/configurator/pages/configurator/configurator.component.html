@@ -7,7 +7,18 @@
     <span>Stwórz swój własny brelok z grawerem i wybierz spośród wielu dostępnych opcji.</span>
   </div>
   <main class="grid grid-cols-[1fr_2fr] items-center justify-center gap-4">
-    <div class="bg-red-500 h-full">Lewa kolumna</div>
+    <div class="h-full grid grid-rows-[2fr_1fr] gap-4">
+      <!-- Preview section -->
+      <mat-card class="h-full" appearance="outlined"> </mat-card>
+      <mat-card class="h-full" appearance="outlined">
+        <mat-card-header>
+          <span class="font-semibold text-lg mb-2">Podsumowanie</span>
+        </mat-card-header>
+        <mat-card-content>
+          <app-summary [model]="configuratorModel()"></app-summary>
+        </mat-card-content>
+      </mat-card>
+    </div>
     <form (submit)="onSubmit($event)" class="h-full flex flex-col gap-4">
       <!-- Snap hook section -->
       <mat-card class="h-full" appearance="outlined">

@@ -1,0 +1,45 @@
+<div class="flex flex-col gap-1">
+  <!-- Karabińczyk -->
+  <div class="flex gap-1 text-sm">
+    <span class="">Karabińczyk: </span>
+    <span class="font-semibold text-sm">{{ model().snapHook }}</span>
+  </div>
+  <!-- Zawieszka serce -->
+  <div class="flex gap-1 text-sm">
+    <span class="text-sm">Zawieszka serce: </span>
+    <span class="font-semibold text-sm">{{
+      model().heart.enabled ? 'Włączona' : 'Wyłączona'
+    }}</span>
+    @if (model().heart.enabled) {
+      <span class="font-semibold text-sm">Kolor: </span> {{ model().heart.color }}
+    }
+  </div>
+  <!-- Zawieszka z imieniem -->
+  <div class="flex gap-1 text-sm">
+    <span class="text-sm">Zawieszka z imieniem: </span>
+    <span class="font-semibold text-sm">{{ model().name.enabled ? 'Włączona' : 'Wyłączona' }}</span>
+    @if (model().name.enabled) {
+      <span class="font-semibold text-sm">Kolor czcionki: </span> {{ model().name.fontColor }}
+      <span class="font-semibold text-sm">Kolor tła: </span> {{ model().name.backgroundColor }}
+    }
+  </div>
+
+  <!-- Zawieszka z dodatkowym tekstem -->
+  <div class="flex flex-col">
+    <div class="flex gap-1">
+      <span class="font-semibold text-sm">Zawieszka z dodatkowym tekstem: </span>
+      <div>{{ model().custom.enabled ? 'Włączona' : 'Wyłączona' }}</div>
+    </div>
+  </div>
+  <div class="flex gap-1">
+    <div class="flex flex-col gap-1">
+      <div class="ml-8">
+        @if (model().custom.enabled) {
+          <span class="font-semibold text-sm">Kolor zawieszki: </span> {{ model().custom.color }}
+
+          <span class="font-semibold text-sm">Tekst zawieszki: </span> {{ model().custom.text }}
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,14 +9,15 @@ import {
   SnapHookOptions,
   ColorOptions,
   PredefinedTexts,
-} from '../domain/configurator.interfaces';
+} from '../../domain/configurator.interfaces';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
-import { YesNoToggleComponent } from '../../shared/components/yes-no-toggle/yes-no-toggle.component';
-import { ColorsComponent } from '../../shared/components/colors/colors.component';
-import { FooterComponent } from './footer/footer.component';
+import { YesNoToggleComponent } from '../../../shared/components/yes-no-toggle/yes-no-toggle.component';
+import { ColorsComponent } from '../../../shared/components/colors/colors.component';
+import { FooterComponent } from '../footer/footer.component';
+import { SummaryComponent } from '../summary/summary.component';
 
 @Component({
   selector: 'app-configurator',
@@ -31,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
     YesNoToggleComponent,
     ColorsComponent,
     FooterComponent,
+    SummaryComponent,
   ],
 })
 export class ConfiguratorComponent {
