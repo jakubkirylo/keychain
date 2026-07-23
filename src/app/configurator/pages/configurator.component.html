@@ -59,33 +59,13 @@
               [value]="configuratorModel().heart.enabled"
               (valueChange)="setHeart($event)"
             />
-            <div class="flex gap-2">
-              <!-- TODO: to separate component -->
-              @for (option of colorOptions; track option) {
-                <button
-                  type="button"
-                  class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
-                  [class.border-pink-600]="configuratorModel().heart.color === option"
-                  [class.border-gray-200]="configuratorModel().heart.color !== option"
-                  [disabled]="!configuratorModel().heart.enabled"
-                  (click)="setHeartColor(option)"
-                >
-                  <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
-                    <path
-                      fill="currentColor"
-                      stroke="rgba(0, 0, 0, 0.18)"
-                      stroke-width="0.75"
-                      d="M12 21.35 10.55 20.03C5.4 15.36 2 12.27 2 8.5
-         2 5.41 4.42 3 7.5 3
-         9.24 3 10.91 3.81 12 5.09
-         13.09 3.81 14.76 3 16.5 3
-         19.58 3 22 5.41 22 8.5
-         22 12.27 18.6 15.36 13.45 20.04Z"
-                    />
-                  </svg>
-                </button>
-              }
-            </div>
+            <app-colors
+              [colorOption]="configuratorModel().heart.color"
+              [disabled]="!configuratorModel().heart.enabled"
+              [shape]="'heart'"
+              (valueChange)="setHeartColor($event)"
+            >
+            </app-colors>
           </div>
         </mat-card-content>
       </mat-card>
@@ -108,32 +88,12 @@
               >
                 Kolor tła
               </div>
-              <div class="flex gap-2">
-                <!-- TODO: to separate component -->
-                @for (option of colorOptions; track option) {
-                  <button
-                    type="button"
-                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
-                    [class.border-pink-600]="configuratorModel().name.fontColor === option"
-                    [class.border-gray-200]="configuratorModel().name.fontColor !== option"
-                    [disabled]="!configuratorModel().name.enabled"
-                    (click)="setNameFontColor(option)"
-                  >
-                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
-                      <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="2.5"
-                        fill="currentColor"
-                        stroke="rgba(0, 0, 0, 0.18)"
-                        stroke-width="0.75"
-                      />
-                    </svg>
-                  </button>
-                }
-              </div>
+              <app-colors
+                [colorOption]="configuratorModel().name.fontColor"
+                [disabled]="!configuratorModel().name.enabled"
+                [shape]="'square'"
+                (valueChange)="setNameFontColor($event)"
+              ></app-colors>
             </div>
             <div class="flex flex-col gap-2">
               <div
@@ -143,32 +103,12 @@
               >
                 Kolor liter
               </div>
-              <div class="flex gap-2">
-                <!-- TODO: to separate component -->
-                @for (option of colorOptions; track option) {
-                  <button
-                    type="button"
-                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
-                    [class.border-pink-600]="configuratorModel().name.backgroundColor === option"
-                    [class.border-gray-200]="configuratorModel().name.backgroundColor !== option"
-                    [disabled]="!configuratorModel().name.enabled"
-                    (click)="setNameBackgroundColor(option)"
-                  >
-                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
-                      <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="2.5"
-                        fill="currentColor"
-                        stroke="rgba(0, 0, 0, 0.18)"
-                        stroke-width="0.75"
-                      />
-                    </svg>
-                  </button>
-                }
-              </div>
+              <app-colors
+                [colorOption]="configuratorModel().name.backgroundColor"
+                [disabled]="!configuratorModel().name.enabled"
+                [shape]="'square'"
+                (valueChange)="setNameBackgroundColor($event)"
+              ></app-colors>
             </div>
           </div>
         </mat-card-content>
@@ -192,32 +132,12 @@
               >
                 Kolor zawieszki
               </div>
-              <div class="flex gap-2">
-                <!-- TODO: to separate component -->
-                @for (option of colorOptions; track option) {
-                  <button
-                    type="button"
-                    class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
-                    [class.border-pink-600]="configuratorModel().custom.color === option"
-                    [class.border-gray-200]="configuratorModel().custom.color !== option"
-                    [disabled]="!configuratorModel().custom.enabled"
-                    (click)="setCustomColor(option)"
-                  >
-                    <svg class="size-8" viewBox="0 0 24 24" [style.color]="option">
-                      <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="2.5"
-                        fill="currentColor"
-                        stroke="rgba(0, 0, 0, 0.18)"
-                        stroke-width="0.75"
-                      />
-                    </svg>
-                  </button>
-                }
-              </div>
+              <app-colors
+                [colorOption]="configuratorModel().custom.color"
+                [disabled]="!configuratorModel().custom.enabled"
+                [shape]="'square'"
+                (valueChange)="setCustomColor($event)"
+              ></app-colors>
               <div
                 class="ml-2 text-sm font-semibold transition-opacity"
                 [class.cursor-not-allowed]="!configuratorModel().custom.enabled"

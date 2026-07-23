@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { YesNoToggleComponent } from '../../shared/components/yes-no-toggle/yes-no-toggle.component';
+import { ColorsComponent } from '../../shared/components/colors/colors/colors.component';
 
 @Component({
   selector: 'app-configurator',
@@ -27,6 +28,7 @@ import { YesNoToggleComponent } from '../../shared/components/yes-no-toggle/yes-
     MatRadioModule,
     MatInputModule,
     YesNoToggleComponent,
+    ColorsComponent,
   ],
 })
 export class ConfiguratorComponent {
