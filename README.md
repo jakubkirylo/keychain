@@ -30,6 +30,9 @@ The application allows customers to visually configure individual keychain eleme
 - Tailwind CSS
 - Material Symbols
 
+## UI Mock
+![alt text](public/mock.png)
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
 
 ## Development server
