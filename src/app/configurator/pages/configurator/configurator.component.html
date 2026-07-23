@@ -59,17 +59,8 @@
         </mat-card-header>
         <mat-card-content>
           <div class="flex flex-col gap-2">
-            <app-yes-no-toggle
-              [value]="configuratorModel().heart.enabled"
-              (valueChange)="setHeart($event)"
-            />
-            <app-colors
-              [colorOption]="configuratorModel().heart.color"
-              [disabled]="!configuratorModel().heart.enabled"
-              [shape]="'heart'"
-              (valueChange)="setHeartColor($event)"
-            >
-            </app-colors>
+            <app-yes-no-toggle [formField]="configuratorForm.heart.enabled" />
+            <app-colors [formField]="configuratorForm.heart.color" [shape]="'heart'" />
           </div>
         </mat-card-content>
       </mat-card>
@@ -80,10 +71,7 @@
         </mat-card-header>
         <mat-card-content>
           <div class="flex flex-col gap-2">
-            <app-yes-no-toggle
-              [value]="configuratorModel().name.enabled"
-              (valueChange)="setName($event)"
-            />
+            <app-yes-no-toggle [formField]="configuratorForm.name.enabled" />
             <div class="flex flex-col gap-2">
               <div
                 class="ml-2 text-sm font-semibold transition-opacity"
@@ -92,12 +80,7 @@
               >
                 Kolor tła
               </div>
-              <app-colors
-                [colorOption]="configuratorModel().name.fontColor"
-                [disabled]="!configuratorModel().name.enabled"
-                [shape]="'square'"
-                (valueChange)="setNameFontColor($event)"
-              ></app-colors>
+              <app-colors [formField]="configuratorForm.name.backgroundColor" [shape]="'square'" />
             </div>
             <div class="flex flex-col gap-2">
               <div
@@ -107,12 +90,7 @@
               >
                 Kolor liter
               </div>
-              <app-colors
-                [colorOption]="configuratorModel().name.backgroundColor"
-                [disabled]="!configuratorModel().name.enabled"
-                [shape]="'square'"
-                (valueChange)="setNameBackgroundColor($event)"
-              ></app-colors>
+              <app-colors [formField]="configuratorForm.name.fontColor" [shape]="'square'" />
             </div>
           </div>
         </mat-card-content>
@@ -124,10 +102,7 @@
         </mat-card-header>
         <mat-card-content>
           <div class="flex flex-col gap-2">
-            <app-yes-no-toggle
-              [value]="configuratorModel().custom.enabled"
-              (valueChange)="setCustom($event)"
-            />
+            <app-yes-no-toggle [formField]="configuratorForm.custom.enabled" />
             <div class="flex flex-col gap-2">
               <div
                 class="ml-2 text-sm font-semibold transition-opacity"
@@ -136,12 +111,7 @@
               >
                 Kolor zawieszki
               </div>
-              <app-colors
-                [colorOption]="configuratorModel().custom.color"
-                [disabled]="!configuratorModel().custom.enabled"
-                [shape]="'square'"
-                (valueChange)="setCustomColor($event)"
-              ></app-colors>
+              <app-colors [formField]="configuratorForm.custom.color" [shape]="'square'" />
               <div
                 class="ml-2 text-sm font-semibold transition-opacity"
                 [class.cursor-not-allowed]="!configuratorModel().custom.enabled"

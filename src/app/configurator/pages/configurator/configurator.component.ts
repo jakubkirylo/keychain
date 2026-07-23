@@ -1,6 +1,6 @@
 import { Component, effect, signal } from '@angular/core';
 import type { MatRadioChange } from '@angular/material/radio';
-import { form } from '@angular/forms/signals';
+import { form, FormField } from '@angular/forms/signals';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -33,6 +33,7 @@ import { SummaryComponent } from '../summary/summary.component';
     ColorsComponent,
     FooterComponent,
     SummaryComponent,
+    FormField,
   ],
 })
 export class ConfiguratorComponent {
@@ -40,15 +41,21 @@ export class ConfiguratorComponent {
     snapHook: 'black',
     heart: {
       enabled: false,
+      color: 'red',
     },
     name: {
       enabled: false,
+      fontColor: 'black',
+      backgroundColor: 'white',
     },
     custom: {
       enabled: false,
+      color: 'black',
+      predefinedText: true,
+      text: '',
     },
   });
-  private readonly configuratorForm = form(this.configuratorModel);
+  protected readonly configuratorForm = form(this.configuratorModel);
 
   protected readonly snapHookOptions = SnapHookOptions;
   protected readonly colorOptions = ColorOptions;
@@ -61,60 +68,6 @@ export class ConfiguratorComponent {
   }
   public selectSnapHookColor(color: SnapHookColor): void {
     this.configuratorForm.snapHook().value.set(color);
-  }
-
-  public setHeart(enabled: boolean): void {
-    this.configuratorForm.heart().value.update((heart) => ({
-      ...heart,
-      enabled,
-      color: enabled ? heart.color : undefined,
-    }));
-  }
-
-  public setHeartColor(color: ColorOptions): void {
-    this.configuratorForm.heart().value.update((heart) => ({
-      ...heart,
-      color,
-    }));
-  }
-
-  public setName(enabled: boolean): void {
-    this.configuratorForm.name().value.update((name) => ({
-      ...name,
-      enabled,
-      fontColor: enabled ? name.fontColor : undefined,
-      backgroundColor: enabled ? name.backgroundColor : undefined,
-    }));
-  }
-
-  public setNameFontColor(color: ColorOptions): void {
-    this.configuratorForm.name().value.update((name) => ({
-      ...name,
-      fontColor: color,
-    }));
-  }
-
-  public setNameBackgroundColor(color: ColorOptions): void {
-    this.configuratorForm.name().value.update((name) => ({
-      ...name,
-      backgroundColor: color,
-    }));
-  }
-
-  public setCustom(enabled: boolean): void {
-    this.configuratorForm.custom().value.update((name) => ({
-      ...name,
-      enabled,
-      color: enabled ? name.color : undefined,
-      text: enabled ? name.text : undefined,
-    }));
-  }
-
-  public setCustomColor(color: ColorOptions): void {
-    this.configuratorForm.custom().value.update((custom) => ({
-      ...custom,
-      color: color,
-    }));
   }
 
   public setCustomText(text: string): void {

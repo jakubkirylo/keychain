@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { ColorOptions } from '../../../configurator/domain/configurator.interfaces';
+import { FormValueControl } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-colors',
@@ -7,16 +8,13 @@ import { ColorOptions } from '../../../configurator/domain/configurator.interfac
   templateUrl: './colors.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColorsComponent {
-  public readonly colorOption = input<ColorOptions>();
-  public readonly disabled = input<boolean>();
+export class ColorsComponent implements FormValueControl<ColorOptions> {
   public readonly shape = input.required<'heart' | 'square'>();
-  public readonly valueChange = output<ColorOptions>();
+  public readonly value = model.required<ColorOptions>();
 
   protected readonly colorOptions = ColorOptions;
+
   protected select(value: ColorOptions): void {
-    if (value !== this.colorOption()) {
-      this.valueChange.emit(value);
-    }
+    this.value.set(value);
   }
 }

@@ -1,5 +1,6 @@
 export type SnapHookColor = 'black' | 'silver' | 'gold';
-export type ColorOptions = 'pink' | 'red' | 'violet' | 'blue' | 'green' | 'yellow';
+export type ColorOptions =
+  'pink' | 'red' | 'violet' | 'blue' | 'green' | 'yellow' | 'white' | 'black';
 interface SnapHookConfig {
   color: SnapHookColor;
   label: string;
@@ -8,20 +9,20 @@ interface SnapHookConfig {
 
 interface HeartConfig {
   enabled: boolean;
-  color?: ColorOptions;
+  color: ColorOptions;
 }
 
 interface NameConfig {
   enabled: boolean;
-  fontColor?: ColorOptions;
-  backgroundColor?: ColorOptions;
+  fontColor: ColorOptions;
+  backgroundColor: ColorOptions;
 }
 
 interface CustomConfig {
   enabled: boolean;
-  color?: ColorOptions;
-  predefinedText?: boolean;
-  text?: string;
+  color: ColorOptions;
+  predefinedText: boolean;
+  text: string;
 }
 
 export interface KeychaingConfig {
@@ -49,7 +50,16 @@ export const SnapHookOptions: SnapHookConfig[] = [
   },
 ];
 
-export const ColorOptions: ColorOptions[] = ['pink', 'red', 'violet', 'blue', 'green', 'yellow'];
+export const ColorOptions: ColorOptions[] = [
+  'pink',
+  'red',
+  'violet',
+  'blue',
+  'green',
+  'yellow',
+  'white',
+  'black',
+];
 
 export const PredefinedTexts: string[] = [
   'Kocham Cię',
