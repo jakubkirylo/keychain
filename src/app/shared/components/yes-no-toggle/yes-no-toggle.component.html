@@ -1,0 +1,30 @@
+<div
+  class="inline-grid w-44 grid-cols-2 overflow-hidden rounded-lg border border-gray-300 bg-white"
+  role="group"
+>
+  <button
+    type="button"
+    class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+    [class.bg-pink-600]="!value()"
+    [class.text-white]="!value()"
+    [class.bg-white]="value()"
+    [class.text-gray-700]="value()"
+    [class.font-semibold]="!value()"
+    (click)="select(false)"
+  >
+    Nie
+  </button>
+
+  <button
+    type="button"
+    class="h-10 border-gray-300 px-5 text-sm font-medium transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-inset"
+    [class.bg-pink-600]="value()"
+    [class.text-white]="value()"
+    [class.bg-white]="!value()"
+    [class.text-gray-700]="!value()"
+    [class.font-semibold]="value()"
+    (click)="select(true)"
+  >
+    Tak
+  </button>
+</div>
