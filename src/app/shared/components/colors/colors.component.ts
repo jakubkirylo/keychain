@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { ColorOptions } from '../../../../configurator/domain/configurator.interfaces';
+import { ColorOptions } from '../../../configurator/domain/configurator.interfaces';
 
 @Component({
   selector: 'app-colors',
