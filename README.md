@@ -1,4 +1,34 @@
-# KeychainConfigurator
+# Personalized Keychain Configurator
+
+A single-page product configurator for creating personalized keychains.
+
+The application allows customers to visually configure individual keychain elements, choose colors, add optional pendants, and provide custom text before placing the configured product in the cart.
+
+## Features
+
+- Snap hook color selection
+- Optional heart pendant with color selection
+- Optional name pendant with:
+  - background color
+  - text color
+- Optional custom text pendant with:
+  - pendant color
+  - predefined text
+  - custom text of up to six words
+- Interactive product preview
+- Responsive layout
+- Accessible selection controls
+- Configuration reset
+- Add-to-cart action
+
+## Technology Stack
+
+- Angular 22
+- TypeScript
+- Angular Signals
+- Angular Material
+- Tailwind CSS
+- Material Symbols
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
 
