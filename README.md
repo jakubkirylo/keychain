@@ -29,6 +29,7 @@ The application allows customers to visually configure individual keychain eleme
 - Angular Material
 - Tailwind CSS
 - Material Symbols
+- Signal Forms
 
 ## UI Mock
 ![alt text](public/mock.png)
