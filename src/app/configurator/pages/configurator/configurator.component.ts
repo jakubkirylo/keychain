@@ -1,6 +1,6 @@
 import { Component, effect, signal } from '@angular/core';
 import type { MatRadioChange } from '@angular/material/radio';
-import { form, FormField } from '@angular/forms/signals';
+import { disabled, form, FormField } from '@angular/forms/signals';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -57,7 +57,17 @@ export class ConfiguratorComponent {
       text: '',
     },
   });
-  protected readonly configuratorForm = form(this.configuratorModel);
+  protected readonly configuratorForm = form(this.configuratorModel, (path) => {
+    disabled(path.heart.color, ({ valueOf }) => !valueOf(path.heart.enabled));
+    disabled(path.name.fontColor, ({ valueOf }) => !valueOf(path.name.enabled));
+    disabled(path.name.backgroundColor, ({ valueOf }) => !valueOf(path.name.enabled));
+    disabled(path.custom.color, ({ valueOf }) => !valueOf(path.custom.enabled));
+    disabled(path.custom.predefinedText, ({ valueOf }) => !valueOf(path.custom.enabled));
+    disabled(
+      path.custom.text,
+      ({ valueOf }) => !valueOf(path.custom.enabled) || valueOf(path.custom.predefinedText),
+    );
+  });
 
   protected readonly snapHookOptions = SnapHookOptions;
   protected readonly colorOptions = ColorOptions;

@@ -5,6 +5,7 @@
       class="relative flex size-14 items-center justify-center rounded-xl border-2 bg-white transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:translate-y-0 disabled:hover:shadow-none"
       [class.border-pink-600]="value() === option"
       [class.border-gray-200]="value() !== option"
+      [disabled]="disabled()"
       (click)="select(option)"
     >
       @if (shape() === 'heart') {
