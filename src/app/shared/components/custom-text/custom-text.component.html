@@ -1,0 +1,43 @@
+<div class="flex flex-col">
+  <div
+    class="ml-2 text-sm font-semibold transition-opacity"
+    [class.cursor-not-allowed]="!value().enabled"
+    [class.opacity-35]="!value().enabled"
+  >
+    Tekst zawieszki
+    <mat-radio-group
+      [value]="value().predefinedText"
+      (change)="setPredefinedText($event.value)"
+      [disabled]="disabled()"
+    >
+      <mat-radio-button [value]="true">Predefiniowany</mat-radio-button>
+      <mat-radio-button [value]="false">Własny</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <mat-form-field>
+    <mat-label>Wybierz predefiniowany tekst zawieszki</mat-label>
+
+    <mat-select
+      class="w-full"
+      [disabled]="!value().enabled || !value().predefinedText"
+      [value]="value().text || ''"
+      (selectionChange)="setCustomText($event.value)"
+    >
+      @for (text of predefinedTexts; track text) {
+        <mat-option [value]="text">
+          {{ text }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Wpisz własny tekst</mat-label>
+    <input
+      matInput
+      placeholder="Wpisz własny tekst"
+      [value]="value().text || ''"
+      (input)="setCustomText($event.target.value)"
+      [disabled]="!value().enabled || value().predefinedText"
+    />
+  </mat-form-field>
+</div>

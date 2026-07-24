@@ -19,6 +19,7 @@ import { ColorsComponent } from '../../../shared/components/colors/colors.compon
 import { FooterComponent } from '../footer/footer.component';
 import { SummaryComponent } from '../summary/summary.component';
 import { SnapHookComponent } from '../../../shared/components/snap-hook/snap-hook.component';
+import { CustomTextComponent } from '../../../shared/components/custom-text/custom-text.component';
 
 @Component({
   selector: 'app-configurator',
@@ -35,6 +36,7 @@ import { SnapHookComponent } from '../../../shared/components/snap-hook/snap-hoo
     FooterComponent,
     SummaryComponent,
     SnapHookComponent,
+    CustomTextComponent,
     FormField,
   ],
 })
@@ -61,12 +63,7 @@ export class ConfiguratorComponent {
     disabled(path.heart.color, ({ valueOf }) => !valueOf(path.heart.enabled));
     disabled(path.name.fontColor, ({ valueOf }) => !valueOf(path.name.enabled));
     disabled(path.name.backgroundColor, ({ valueOf }) => !valueOf(path.name.enabled));
-    disabled(path.custom.color, ({ valueOf }) => !valueOf(path.custom.enabled));
-    disabled(path.custom.predefinedText, ({ valueOf }) => !valueOf(path.custom.enabled));
-    disabled(
-      path.custom.text,
-      ({ valueOf }) => !valueOf(path.custom.enabled) || valueOf(path.custom.predefinedText),
-    );
+    disabled(path.custom, ({ valueOf }) => !valueOf(path.custom.enabled));
   });
 
   protected readonly snapHookOptions = SnapHookOptions;

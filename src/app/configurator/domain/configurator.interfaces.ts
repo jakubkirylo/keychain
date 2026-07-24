@@ -18,7 +18,7 @@ interface NameConfig {
   backgroundColor: ColorOptions;
 }
 
-interface CustomConfig {
+export interface CustomConfig {
   enabled: boolean;
   color: ColorOptions;
   predefinedText: boolean;

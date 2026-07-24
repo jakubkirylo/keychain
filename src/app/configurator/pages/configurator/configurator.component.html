@@ -83,57 +83,7 @@
                 Kolor zawieszki
               </div>
               <app-colors [formField]="configuratorForm.custom.color" [shape]="'square'" />
-              <div
-                class="ml-2 text-sm font-semibold transition-opacity"
-                [class.cursor-not-allowed]="!configuratorModel().custom.enabled"
-                [class.opacity-35]="!configuratorModel().custom.enabled"
-              >
-                Tekst zawieszki
-                <mat-radio-group (change)="customTextType($event)">
-                  <mat-radio-button
-                    [checked]="!!!configuratorModel().custom.predefinedText"
-                    [value]="false"
-                    >Predefiniowany</mat-radio-button
-                  >
-                  <mat-radio-button
-                    [checked]="!!configuratorModel().custom.predefinedText"
-                    [value]="true"
-                    >Własny</mat-radio-button
-                  >
-                </mat-radio-group>
-              </div>
-              <mat-form-field>
-                <mat-label>Wybierz predefiniowany tekst zawieszki</mat-label>
-
-                <mat-select
-                  class="w-full"
-                  [disabled]="
-                    !configuratorModel().custom.enabled ||
-                    !!configuratorModel().custom.predefinedText
-                  "
-                  [value]="configuratorModel().custom.text || ''"
-                  (selectionChange)="setCustomText($event.value)"
-                >
-                  @for (text of predefinedTexts; track text) {
-                    <mat-option [value]="text">
-                      {{ text }}
-                    </mat-option>
-                  }
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Wpisz własny tekst</mat-label>
-                <input
-                  matInput
-                  placeholder="Wpisz własny tekst"
-                  [value]="configuratorModel().custom.text || ''"
-                  (input)="setCustomText($event.target.value)"
-                  [disabled]="
-                    !configuratorModel().custom.enabled ||
-                    !configuratorModel().custom.predefinedText
-                  "
-                />
-              </mat-form-field>
+              <app-custom-text [formField]="configuratorForm.custom"></app-custom-text>
             </div>
           </div>
         </mat-card-content>
