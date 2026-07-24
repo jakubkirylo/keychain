@@ -19,37 +19,8 @@
           <span class="font-semibold text-sm">1. Karabińczyk - kolor</span>
         </mat-card-header>
 
-        <mat-card-content class="pt-4">
-          <div class="flex flex-wrap gap-3" role="group">
-            <!-- TODO: to separate component -->
-            @for (option of snapHookOptions; track option.color) {
-              <button
-                type="button"
-                class="group relative grid grid-rows-[104px_36px] overflow-hidden rounded-xl border-2 bg-white text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
-                [class.border-pink-600]="configuratorModel().snapHook === option.color"
-                [class.border-gray-200]="configuratorModel().snapHook !== option.color"
-                (click)="selectSnapHookColor(option.color)"
-              >
-                <div class="flex items-center justify-center bg-gray-50 p-2">
-                  <img
-                    class="size-25 object-contain transition-transform group-hover:scale-150"
-                    [src]="option.imageUrl"
-                    [alt]="'Karabińczyk – kolor ' + option.label"
-                  />
-                </div>
-
-                <div class="flex min-w-0 items-center gap-2 px-3">
-                  <span
-                    class="size-4 shrink-0 rounded-full border border-black/15 shadow-sm"
-                    [style.background]="option.color"
-                  ></span>
-                  <span class="truncate font-medium text-gray-900">
-                    {{ option.label }}
-                  </span>
-                </div>
-              </button>
-            }
-          </div>
+        <mat-card-content class="pt-4"
+          ><app-snap-hook [formField]="configuratorForm.snapHook"></app-snap-hook>
         </mat-card-content>
       </mat-card>
       <!-- Heart section -->

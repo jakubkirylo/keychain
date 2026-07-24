@@ -18,6 +18,7 @@ import { YesNoToggleComponent } from '../../../shared/components/yes-no-toggle/y
 import { ColorsComponent } from '../../../shared/components/colors/colors.component';
 import { FooterComponent } from '../footer/footer.component';
 import { SummaryComponent } from '../summary/summary.component';
+import { SnapHookComponent } from '../../../shared/components/snap-hook/snap-hook.component';
 
 @Component({
   selector: 'app-configurator',
@@ -33,6 +34,7 @@ import { SummaryComponent } from '../summary/summary.component';
     ColorsComponent,
     FooterComponent,
     SummaryComponent,
+    SnapHookComponent,
     FormField,
   ],
 })
@@ -65,9 +67,6 @@ export class ConfiguratorComponent {
     effect(() => {
       console.warn('konfiguracja: ', this.configuratorModel());
     });
-  }
-  public selectSnapHookColor(color: SnapHookColor): void {
-    this.configuratorForm.snapHook().value.set(color);
   }
 
   public setCustomText(text: string): void {
