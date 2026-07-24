@@ -91,6 +91,24 @@
     </form>
   </main>
   <footer>
+    <div class="grid gap-3 md:grid-cols-[minmax(220px,0.65fr)_minmax(320px,1.35fr)]">
+      <button
+        (click)="resetForm()"
+        type="button"
+        class="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+      >
+        <mat-icon class="size-8 text-[32px] leading-8"> delete </mat-icon>
+        Wyczyść wszystko
+      </button>
+
+      <button
+        type="button"
+        class="flex min-h-12 items-center justify-center gap-2 rounded-xl bg-pink-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-pink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+      >
+        <mat-icon class="size-8 text-[32px] leading-8"> shopping_bag </mat-icon>
+        Dodaj do koszyka
+      </button>
+    </div>
     <app-footer></app-footer>
   </footer>
 </div>

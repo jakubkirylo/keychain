@@ -72,3 +72,24 @@ export const PredefinedTexts: string[] = [
   'Szczęśliwego Nowego Roku',
   'Chyba Ty!',
 ];
+
+export function createInitialConfiguratorConfig(): KeychaingConfig {
+  return {
+    snapHook: 'black',
+    heart: {
+      enabled: false,
+      color: 'red',
+    },
+    name: {
+      enabled: false,
+      fontColor: 'black',
+      backgroundColor: 'white',
+    },
+    custom: {
+      enabled: false,
+      color: 'black',
+      predefinedText: true,
+      text: '',
+    },
+  };
+}

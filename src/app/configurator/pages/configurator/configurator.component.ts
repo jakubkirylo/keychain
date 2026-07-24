@@ -9,6 +9,7 @@ import {
   SnapHookOptions,
   ColorOptions,
   PredefinedTexts,
+  createInitialConfiguratorConfig,
 } from '../../domain/configurator.interfaces';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
@@ -41,24 +42,7 @@ import { CustomTextComponent } from '../../../shared/components/custom-text/cust
   ],
 })
 export class ConfiguratorComponent {
-  configuratorModel = signal<KeychaingConfig>({
-    snapHook: 'black',
-    heart: {
-      enabled: false,
-      color: 'red',
-    },
-    name: {
-      enabled: false,
-      fontColor: 'black',
-      backgroundColor: 'white',
-    },
-    custom: {
-      enabled: false,
-      color: 'black',
-      predefinedText: true,
-      text: '',
-    },
-  });
+  protected readonly configuratorModel = signal<KeychaingConfig>(createInitialConfiguratorConfig());
   protected readonly configuratorForm = form(this.configuratorModel, (path) => {
     disabled(path.heart.color, ({ valueOf }) => !valueOf(path.heart.enabled));
     disabled(path.name.fontColor, ({ valueOf }) => !valueOf(path.name.enabled));
@@ -66,35 +50,21 @@ export class ConfiguratorComponent {
     disabled(path.custom, ({ valueOf }) => !valueOf(path.custom.enabled));
   });
 
-  protected readonly snapHookOptions = SnapHookOptions;
-  protected readonly colorOptions = ColorOptions;
-  protected readonly predefinedTexts = PredefinedTexts;
-
   constructor() {
     effect(() => {
       console.warn('konfiguracja: ', this.configuratorModel());
     });
   }
 
-  public setCustomText(text: string): void {
-    this.configuratorForm.custom().value.update((custom) => ({
-      ...custom,
-      text: text,
-    }));
-  }
-
-  public customTextType(event: MatRadioChange): void {
-    this.configuratorForm.custom().value.update((custom) => ({
-      ...custom,
-      predefinedText: event.value,
-    }));
-  }
-
-  public onSubmit(event: Event): void {
+  protected onSubmit(event: Event): void {
     event.preventDefault();
 
     const config = this.configuratorForm();
 
     console.warn('on submit: ', config);
+  }
+
+  protected resetForm(): void {
+    this.configuratorForm().reset(createInitialConfiguratorConfig());
   }
 }
